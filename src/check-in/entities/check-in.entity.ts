@@ -19,6 +19,12 @@ export class CheckIn {
     })
     status: Status;
 
+    @Column({ nullable: true })
+    checkInDate: Date;
+
+    @Column({ nullable: true })
+    checkOutDate: Date;
+
     @CreateDateColumn()
     createdAt: Date;
 

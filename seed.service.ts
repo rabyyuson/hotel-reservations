@@ -16,6 +16,8 @@ export class SeedService {
                     name: '',
                     room: index + 1,
                     status: undefined,
+                    checkInDate: undefined,
+                    checkOutDate: undefined,
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 };

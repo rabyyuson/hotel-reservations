@@ -14,6 +14,8 @@ export class CheckInService {
     async create(@Body() createCheckInDto: CreateCheckInDto) {
         const reservation = await this.repository.save({
             ...createCheckInDto,
+            checkInDate: createCheckInDto.checkInDate,
+            checkOutDate: createCheckInDto.checkOutDate,
             createdAt: createCheckInDto.createdAt,
             updatedAt: createCheckInDto.updatedAt,
         });
@@ -57,6 +59,8 @@ export class CheckInService {
         const data = await this.repository.save({
             ...reservation,
             ...updateCheckInDto,
+            checkInDate: updateCheckInDto.checkInDate ?? reservation.checkInDate,
+            checkOutDate: updateCheckInDto.checkOutDate ?? reservation.checkOutDate,
             createdAt: updateCheckInDto.createdAt ?? reservation.createdAt,
             updatedAt: updateCheckInDto.updatedAt ?? reservation.updatedAt,
         });
