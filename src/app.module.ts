@@ -19,8 +19,16 @@ import ormConfig from '../orm.config';
     TypeOrmModule.forRootAsync({
       useFactory: ormConfig,
     }),
-    TypeOrmModule.forFeature([Reservation]),],
-  controllers: [AppController, ReservationsController],
-  providers: [AppService, SeedService, ReservationService],
+    TypeOrmModule.forFeature([Reservation]),
+  ],
+  controllers: [
+    AppController,
+    ReservationsController,
+  ],
+  providers: [
+    AppService,
+    SeedService,
+    ReservationService,
+  ],
 })
 export class AppModule {}
