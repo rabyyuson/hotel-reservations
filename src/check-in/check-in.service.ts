@@ -1,26 +1,80 @@
-import { Injectable } from '@nestjs/common';
+
+import { Body, Controller, Delete, Get, HttpCode, NotFoundException, Patch, Param, Post } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateCheckInDto } from './dto/create-check-in.dto';
 import { UpdateCheckInDto } from './dto/update-check-in.dto';
+import { CheckIn } from './entities/check-in.entity';
+
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class CheckInService {
-  create(createCheckInDto: CreateCheckInDto) {
-    return 'This action adds a new checkIn';
-  }
+  constructor(@InjectRepository(CheckIn) private readonly repository: Repository<CheckIn>) {}
+  
+    async create(@Body() createCheckInDto: CreateCheckInDto) {
+        const reservation = await this.repository.save({
+            ...createCheckInDto,
+            createdAt: createCheckInDto.createdAt,
+            updatedAt: createCheckInDto.updatedAt,
+        });
 
-  findAll() {
-    return `This action returns all checkIn`;
-  }
+        return {
+            success: true,
+            data: reservation,
+        };
+    }
 
-  findOne(id: number) {
-    return `This action returns a #${id} checkIn`;
-  }
+    async findAll() {
+        const reservations = await this.repository.find();
 
-  update(id: number, updateCheckInDto: UpdateCheckInDto) {
-    return `This action updates a #${id} checkIn`;
-  }
+        return {
+            success: true,
+            count: reservations.length,
+            data: reservations,
+        };
+    }
 
-  remove(id: number) {
-    return `This action removes a #${id} checkIn`;
-  }
+    async findOne(@Param('id') id: string) {
+        const reservation = await this.repository.findOneBy({ id: Number(id) });
+
+        if (!reservation) {
+            throw new NotFoundException();
+        }
+
+        return {
+            success: true,
+            data: reservation,
+        }
+    }
+
+    async update(@Param('id') id: string, @Body() updateCheckInDto: UpdateCheckInDto) {
+        const reservation = await this.repository.findOneBy({ id: Number(id) });
+
+        if (!reservation) {
+            throw new NotFoundException();
+        }
+
+        const data = await this.repository.save({
+            ...reservation,
+            ...updateCheckInDto,
+            createdAt: updateCheckInDto.createdAt ?? reservation.createdAt,
+            updatedAt: updateCheckInDto.updatedAt ?? reservation.updatedAt,
+        });
+
+        return {
+            success: true,
+            data,
+        }
+    }
+
+    async remove(@Param('id') id: string) {
+        const reservation = await this.repository.findOneBy({ id: Number(id) });
+
+        if (!reservation) {
+            throw new NotFoundException();
+        }
+
+        await this.repository.remove(reservation);
+    }
 }

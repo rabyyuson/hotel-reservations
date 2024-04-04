@@ -19,16 +19,16 @@ export class CheckInController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.checkInService.findOne(+id);
+    return this.checkInService.findOne(id);
   }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCheckInDto: UpdateCheckInDto) {
-    return this.checkInService.update(+id, updateCheckInDto);
+    return this.checkInService.update(id, updateCheckInDto);
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.checkInService.remove(+id);
+    return this.checkInService.remove(id);
   }
 }
