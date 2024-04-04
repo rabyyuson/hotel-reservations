@@ -1,6 +1,6 @@
-import { Status } from '../status.enum';
+import { Status } from "../status.enum";
 
-export class CreateCheckInDto {
+export class CreateReservationDto {
     name: string;
     room: number;
     status: Status;

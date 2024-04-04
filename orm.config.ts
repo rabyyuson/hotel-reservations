@@ -1,6 +1,6 @@
 import { registerAs } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { CheckIn } from 'src/check-in/entities/check-in.entity';
+import { Reservation } from 'src/reservations/entities/reservation.entity';
 
 export default registerAs(
     'orm.config',
@@ -11,7 +11,7 @@ export default registerAs(
         username: 'test1',
         password: 'test1',
         database: 'hotel-reservations',
-        entities: [CheckIn],
+        entities: [Reservation],
         synchronize: true,
     })
 );

@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CheckIn } from 'src/check-in/entities/check-in.entity';
+import { Reservation } from 'src/reservations/entities/reservation.entity';
 
 @Injectable()
 export class SeedService {
-    constructor(@InjectRepository(CheckIn) private readonly repository: Repository<CheckIn>) {}
+    constructor(@InjectRepository(Reservation) private readonly repository: Repository<Reservation>) {}
 
     async seedData() {
         const existingRecords = await this.repository.count();

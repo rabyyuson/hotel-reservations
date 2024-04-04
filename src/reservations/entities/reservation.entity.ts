@@ -2,7 +2,7 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 import { Status } from '../status.enum';
 
 @Entity()
-export class CheckIn {
+export class Reservation {
     @PrimaryGeneratedColumn('uuid')
     id: number;
 

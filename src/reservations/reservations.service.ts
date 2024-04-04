@@ -2,22 +2,22 @@
 import { Body, NotFoundException, Param } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { CreateCheckInDto } from './dto/create-check-in.dto';
-import { UpdateCheckInDto } from './dto/update-check-in.dto';
-import { CheckIn } from './entities/check-in.entity';
+import { CreateReservationDto } from './dto/create-reservation.dto';
+import { UpdateReservationDto } from './dto/update-reservation.dto';
+import { Reservation } from './entities/reservation.entity';
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
-export class CheckInService {
-  constructor(@InjectRepository(CheckIn) private readonly repository: Repository<CheckIn>) {}
+export class ReservationService {
+  constructor(@InjectRepository(Reservation) private readonly repository: Repository<Reservation>) {}
   
-    async create(@Body() createCheckInDto: CreateCheckInDto) {
+    async create(@Body() input: CreateReservationDto) {
         const reservation = await this.repository.save({
-            ...createCheckInDto,
-            checkInDate: createCheckInDto.checkInDate,
-            checkOutDate: createCheckInDto.checkOutDate,
-            createdAt: createCheckInDto.createdAt,
-            updatedAt: createCheckInDto.updatedAt,
+            ...input,
+            ReservationDate: input.checkInDate,
+            checkOutDate: input.checkOutDate,
+            createdAt: input.createdAt,
+            updatedAt: input.updatedAt,
         });
 
         return {
@@ -49,7 +49,7 @@ export class CheckInService {
         }
     }
 
-    async update(@Param('id') id: string, @Body() updateCheckInDto: UpdateCheckInDto) {
+    async update(@Param('id') id: string, @Body() input: UpdateReservationDto) {
         const reservation = await this.repository.findOneBy({ room: Number(id) });
 
         if (!reservation) {
@@ -58,11 +58,11 @@ export class CheckInService {
 
         const data = await this.repository.save({
             ...reservation,
-            ...updateCheckInDto,
-            checkInDate: updateCheckInDto.checkInDate ?? reservation.checkInDate,
-            checkOutDate: updateCheckInDto.checkOutDate ?? reservation.checkOutDate,
-            createdAt: updateCheckInDto.createdAt ?? reservation.createdAt,
-            updatedAt: updateCheckInDto.updatedAt ?? reservation.updatedAt,
+            ...input,
+            checkInDate: input.checkInDate ?? reservation.checkInDate,
+            checkOutDate: input.checkOutDate ?? reservation.checkOutDate,
+            createdAt: input.createdAt ?? reservation.createdAt,
+            updatedAt: input.updatedAt ?? reservation.updatedAt,
         });
 
         return {

@@ -3,10 +3,10 @@ import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CheckInController } from './check-in/check-in.controller';
-import { CheckInService } from './check-in/check-in.service';
 import { SeedService } from 'seed.service';
-import { CheckIn } from './check-in/entities/check-in.entity';
+import { Reservation } from './reservations/entities/reservation.entity';
+import { ReservationsController } from './reservations/reservations.controller';
+import { ReservationService } from './reservations/reservations.service';
 import ormConfig from '../orm.config';
 
 @Module({
@@ -19,8 +19,8 @@ import ormConfig from '../orm.config';
     TypeOrmModule.forRootAsync({
       useFactory: ormConfig,
     }),
-    TypeOrmModule.forFeature([CheckIn]),],
-  controllers: [AppController, CheckInController],
-  providers: [AppService, SeedService, CheckInService],
+    TypeOrmModule.forFeature([Reservation]),],
+  controllers: [AppController, ReservationsController],
+  providers: [AppService, SeedService, ReservationService],
 })
 export class AppModule {}
