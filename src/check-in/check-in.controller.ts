@@ -7,28 +7,28 @@ import { UpdateCheckInDto } from './dto/update-check-in.dto';
 export class CheckInController {
   constructor(private readonly checkInService: CheckInService) {}
 
-  @Post()
-  create(@Body() createCheckInDto: CreateCheckInDto) {
-    return this.checkInService.create(createCheckInDto);
-  }
+  // @Post()
+  // create(@Body() createCheckInDto: CreateCheckInDto) {
+  //   return this.checkInService.create(createCheckInDto);
+  // }
 
-  @Get()
-  findAll() {
-    return this.checkInService.findAll();
-  }
+  // @Get()
+  // findAll() {
+  //   return this.checkInService.findAll();
+  // }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.checkInService.findOne(id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.checkInService.findOne(id);
+  // }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCheckInDto: UpdateCheckInDto) {
     return this.checkInService.update(id, updateCheckInDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.checkInService.remove(id);
-  }
+  // @Delete(':id')
+  // remove(@Param('id') id: string) {
+  //   return this.checkInService.remove(id);
+  // }
 }

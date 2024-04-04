@@ -5,7 +5,6 @@ import { Repository } from 'typeorm';
 import { CreateCheckInDto } from './dto/create-check-in.dto';
 import { UpdateCheckInDto } from './dto/update-check-in.dto';
 import { CheckIn } from './entities/check-in.entity';
-
 import { Injectable } from '@nestjs/common';
 
 @Injectable()
@@ -36,7 +35,7 @@ export class CheckInService {
     }
 
     async findOne(@Param('id') id: string) {
-        const reservation = await this.repository.findOneBy({ id: Number(id) });
+        const reservation = await this.repository.findOneBy({ room: Number(id) });
 
         if (!reservation) {
             throw new NotFoundException();
@@ -49,7 +48,7 @@ export class CheckInService {
     }
 
     async update(@Param('id') id: string, @Body() updateCheckInDto: UpdateCheckInDto) {
-        const reservation = await this.repository.findOneBy({ id: Number(id) });
+        const reservation = await this.repository.findOneBy({ room: Number(id) });
 
         if (!reservation) {
             throw new NotFoundException();
@@ -69,7 +68,7 @@ export class CheckInService {
     }
 
     async remove(@Param('id') id: string) {
-        const reservation = await this.repository.findOneBy({ id: Number(id) });
+        const reservation = await this.repository.findOneBy({ room: Number(id) });
 
         if (!reservation) {
             throw new NotFoundException();

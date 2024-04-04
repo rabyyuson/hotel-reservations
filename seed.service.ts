@@ -5,24 +5,24 @@ import { CheckIn } from 'src/check-in/entities/check-in.entity';
 
 @Injectable()
 export class SeedService {
-  constructor(@InjectRepository(CheckIn) private readonly repository: Repository<CheckIn>) {}
+    constructor(@InjectRepository(CheckIn) private readonly repository: Repository<CheckIn>) {}
 
-  async seedData() {
-    const existingRecords = await this.repository.count();
+    async seedData() {
+        const existingRecords = await this.repository.count();
 
-    if (!existingRecords) {
-        console.log("Database already seeded. Skipping seeding process.");
+        if (existingRecords === 0) {
+            for (let index = 0; index < 10; index++) {
+                const data = {
+                    name: '',
+                    room: index + 1,
+                    status: undefined,
+                    createdAt: new Date(),
+                    updatedAt: new Date(),
+                };
+                await this.repository.save(data);
+            }
+        } else {
+            console.log("Database already seeded. Skipping seeding process.");
+        }
     }
-
-    for (let index = 0; index < 10; index++) {
-        const data = {
-            name: '',
-            room: index + 1,
-            status: undefined,
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        };
-        await this.repository.save(data);
-    }
-  }
 }
