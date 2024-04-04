@@ -1,5 +1,5 @@
 
-import { Body, Controller, Delete, Get, HttpCode, NotFoundException, Patch, Param, Post } from '@nestjs/common';
+import { Body, NotFoundException, Param } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateCheckInDto } from './dto/create-check-in.dto';

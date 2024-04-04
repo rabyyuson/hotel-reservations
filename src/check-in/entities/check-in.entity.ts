@@ -7,6 +7,9 @@ export class CheckIn {
     id: number;
 
     @Column()
+    name: string;
+
+    @Column()
     room: number;
     
     @Column({

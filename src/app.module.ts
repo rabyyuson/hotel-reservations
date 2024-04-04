@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CheckInController } from './check-in/check-in.controller';
 import { CheckInService } from './check-in/check-in.service';
+import { SeedService } from 'seed.service';
 import { CheckIn } from './check-in/entities/check-in.entity';
 import ormConfig from '../orm.config';
 
@@ -20,6 +21,6 @@ import ormConfig from '../orm.config';
     }),
     TypeOrmModule.forFeature([CheckIn]),],
   controllers: [AppController, CheckInController],
-  providers: [AppService, CheckInService],
+  providers: [AppService, SeedService, CheckInService],
 })
 export class AppModule {}
