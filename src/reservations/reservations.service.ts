@@ -52,8 +52,8 @@ export class ReservationService {
     const data = await this.repository.save({
       ...reservation,
       ...input,
-      checkInDate: input.checkInDate ?? reservation.checkInDate,
-      checkOutDate: input.checkOutDate ?? reservation.checkOutDate,
+      checkInDate: input.checkInDate,
+      checkOutDate: input.checkOutDate,
       createdAt: input.createdAt ?? reservation.createdAt,
       updatedAt: input.updatedAt ?? reservation.updatedAt,
     });

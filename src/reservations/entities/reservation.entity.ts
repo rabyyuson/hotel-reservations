@@ -6,7 +6,7 @@ export class Reservation {
   @PrimaryGeneratedColumn('uuid')
   id: number;
 
-  @Column()
+  @Column({ nullable: true })
   name: string;
 
   @Column()

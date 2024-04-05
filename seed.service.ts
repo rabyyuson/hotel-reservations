@@ -13,7 +13,7 @@ export class SeedService {
         if (existingRecords === 0) {
             for (let index = 0; index < 10; index++) {
                 const data = {
-                    name: '',
+                    name: undefined,
                     room: index + 1,
                     status: undefined,
                     confirmation: undefined,
