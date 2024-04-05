@@ -20,6 +20,9 @@ export class Reservation {
     status: Status;
 
     @Column({ nullable: true })
+    confirmation: string;
+
+    @Column({ nullable: true })
     checkInDate: Date;
 
     @Column({ nullable: true })

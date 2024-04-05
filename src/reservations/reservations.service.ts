@@ -21,19 +21,13 @@ export class ReservationService {
         });
 
         return {
-            success: true,
             data: reservation,
         };
     }
 
     async findAll() {
         const reservations = await this.repository.find();
-
-        return {
-            success: true,
-            count: reservations.length,
-            data: reservations,
-        };
+        return reservations;
     }
 
     async findOne(@Param('id') id: string) {
@@ -44,7 +38,6 @@ export class ReservationService {
         }
 
         return {
-            success: true,
             data: reservation,
         }
     }
@@ -66,7 +59,6 @@ export class ReservationService {
         });
 
         return {
-            success: true,
             data,
         }
     }
