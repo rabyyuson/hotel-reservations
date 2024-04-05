@@ -1,6 +1,6 @@
 ## Prerequisites
 
-You will need a Postgres database installed locally. You will also need to update the `orm.config.ts` details to be able to connect to your database. You will also need to create a `.env` file with the following 
+You will need a Postgres database installed locally. You will also need to update the `orm.config.ts` details to be able to connect to your database. You will also need to create a `.env` file and modify the values accordingly.
 
 ```bash
 HOST=<HOST>
