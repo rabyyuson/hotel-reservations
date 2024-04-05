@@ -3,34 +3,34 @@ import { Status } from '../status.enum';
 
 @Entity()
 export class Reservation {
-    @PrimaryGeneratedColumn('uuid')
-    id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: number;
 
-    @Column()
-    name: string;
+  @Column()
+  name: string;
 
-    @Column()
-    room: number;
-    
-    @Column({
-        type: 'enum',
-        enum: Status,
-        default: Status.AVAILABLE,
-    })
-    status: Status;
+  @Column()
+  room: number;
+  
+  @Column({
+      type: 'enum',
+      enum: Status,
+      default: Status.AVAILABLE,
+  })
+  status: Status;
 
-    @Column({ nullable: true })
-    confirmation: string;
+  @Column({ nullable: true })
+  confirmation: string;
 
-    @Column({ nullable: true })
-    checkInDate: Date;
+  @Column({ nullable: true })
+  checkInDate: Date;
 
-    @Column({ nullable: true })
-    checkOutDate: Date;
+  @Column({ nullable: true })
+  checkOutDate: Date;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

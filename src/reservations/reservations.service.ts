@@ -11,65 +11,65 @@ import { Injectable } from '@nestjs/common';
 export class ReservationService {
   constructor(@InjectRepository(Reservation) private readonly repository: Repository<Reservation>) {}
   
-    async create(@Body() input: CreateReservationDto) {
-        const reservation = await this.repository.save({
-            ...input,
-            ReservationDate: input.checkInDate,
-            checkOutDate: input.checkOutDate,
-            createdAt: input.createdAt,
-            updatedAt: input.updatedAt,
-        });
+  async create(@Body() input: CreateReservationDto) {
+    const reservation = await this.repository.save({
+      ...input,
+      ReservationDate: input.checkInDate,
+      checkOutDate: input.checkOutDate,
+      createdAt: input.createdAt,
+      updatedAt: input.updatedAt,
+    });
 
-        return {
-            data: reservation,
-        };
+    return {
+      data: reservation,
+    };
+  }
+
+  async findAll() {
+    const reservations = await this.repository.find();
+    return reservations;
+  }
+
+  async findOne(@Param('id') id: string) {
+    const reservation = await this.repository.findOneBy({ room: Number(id) });
+
+    if (!reservation) {
+      throw new NotFoundException();
     }
 
-    async findAll() {
-        const reservations = await this.repository.find();
-        return reservations;
+    return {
+      data: reservation,
+    }
+  }
+
+  async update(@Param('id') id: string, @Body() input: UpdateReservationDto) {
+    const reservation = await this.repository.findOneBy({ room: Number(id) });
+
+    if (!reservation) {
+      throw new NotFoundException();
     }
 
-    async findOne(@Param('id') id: string) {
-        const reservation = await this.repository.findOneBy({ room: Number(id) });
+    const data = await this.repository.save({
+      ...reservation,
+      ...input,
+      checkInDate: input.checkInDate ?? reservation.checkInDate,
+      checkOutDate: input.checkOutDate ?? reservation.checkOutDate,
+      createdAt: input.createdAt ?? reservation.createdAt,
+      updatedAt: input.updatedAt ?? reservation.updatedAt,
+    });
 
-        if (!reservation) {
-            throw new NotFoundException();
-        }
+    return {
+      data,
+    }
+  }
 
-        return {
-            data: reservation,
-        }
+  async remove(@Param('id') id: string) {
+    const reservation = await this.repository.findOneBy({ room: Number(id) });
+
+    if (!reservation) {
+      throw new NotFoundException();
     }
 
-    async update(@Param('id') id: string, @Body() input: UpdateReservationDto) {
-        const reservation = await this.repository.findOneBy({ room: Number(id) });
-
-        if (!reservation) {
-            throw new NotFoundException();
-        }
-
-        const data = await this.repository.save({
-            ...reservation,
-            ...input,
-            checkInDate: input.checkInDate ?? reservation.checkInDate,
-            checkOutDate: input.checkOutDate ?? reservation.checkOutDate,
-            createdAt: input.createdAt ?? reservation.createdAt,
-            updatedAt: input.updatedAt ?? reservation.updatedAt,
-        });
-
-        return {
-            data,
-        }
-    }
-
-    async remove(@Param('id') id: string) {
-        const reservation = await this.repository.findOneBy({ room: Number(id) });
-
-        if (!reservation) {
-            throw new NotFoundException();
-        }
-
-        await this.repository.remove(reservation);
-    }
+    await this.repository.remove(reservation);
+  }
 }
