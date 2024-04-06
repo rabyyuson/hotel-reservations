@@ -4,8 +4,7 @@ You will need a Postgres database installed locally. You will also need to updat
 
 ```bash
 HOST=<HOST>
-APP_PORT=<APP_PORT>
-DATABASE_PORT=<DATABASE_PORT>
+PORT=<PORT>
 USERNAME=<USERNAME>
 PASSWORD=<PASSWORD>
 DATABASE=<DATABASE>

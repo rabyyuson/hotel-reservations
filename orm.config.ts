@@ -7,8 +7,8 @@ export default registerAs(
     'orm.config',
     (): TypeOrmModuleOptions => ({
         type: 'postgres',
-        host: process.env.DATABASE_HOST,
-        port: Number(process.env.DATABASE_PORT),
+        host: process.env.HOST,
+        port: Number(process.env.PORT),
         username: process.env.USERNAME,
         password: process.env.PASSWORD,
         database: process.env.DATABASE,
