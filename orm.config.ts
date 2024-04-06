@@ -1,6 +1,7 @@
 import { registerAs } from '@nestjs/config';
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { Reservation } from 'src/reservations/entities/reservation.entity';
+import dotenv from "dotenv/config";
 
 export default registerAs(
     'orm.config',
