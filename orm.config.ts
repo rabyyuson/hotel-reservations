@@ -7,11 +7,11 @@ export default registerAs(
     'orm.config',
     (): TypeOrmModuleOptions => ({
         type: 'postgres',
-        host: 'localhost',
-        port: 5432,
-        username: 'test1',
-        password: 'test1',
-        database: 'hotel-reservations',
+        host: process.env.HOST,
+        port: process.env.PORT ? parseInt(process.env.PORT, 10) : 5432,
+        username: process.env.USERNAME,
+        password: process.env.PASSWORD,
+        database: process.env.DATABASE,
         entities: [Reservation],
         synchronize: true,
     })
