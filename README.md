@@ -3,8 +3,10 @@
 You will need a Postgres database installed locally. You will also need to update the `orm.config.ts` details to be able to connect to your database. You will also need to create a `.env` file and modify the values accordingly.
 
 ```bash
-HOST=<HOST>
-PORT=<PORT>
+APP_HOST=<DATABASE_HOST>
+DATABASE_HOST=<DATABASE_HOST>
+APP_PORT=<APP_PORT>
+DATABASE_PORT=<DATABASE_PORT>
 USERNAME=<USERNAME>
 PASSWORD=<PASSWORD>
 DATABASE=<DATABASE>
